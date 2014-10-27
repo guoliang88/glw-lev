@@ -30,15 +30,14 @@ check_variable ${buildimg}
 printf "Master:$masterhost Computer:$comhost(1...n) Use_image:$buildimg Computer node:$Number, Continue? [y/n]"
 read CONTINUE
 printf "\n"
-if [ -z ${CONTINUE} ]
-then
-        echo "exit the program !"
-        exit
-fi
-
 if [ ${CONTINUE}  = "y" ]
 then
+   DNSPATH="/etc/dnsmasq.d"
+  if [! -x "$DNSPATH"];then
         echo "continuing the progrem...."
+  else
+         apt-get  -y install dnsmasq
+  fi
 else
         echo "exit the program ."
         exit
